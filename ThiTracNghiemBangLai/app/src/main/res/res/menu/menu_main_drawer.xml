@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_trangchu"
+            android:title="Trang chủ"
+            android:icon="@drawable/ic_home"
+
+            />
+
+        <item
+            android:id="@+id/nav_hoclythuyet"
+            android:title="Học lý thuyết"
+            android:icon="@drawable/ic_home_hoclythuyet"
+            />
+        <item
+            android:id="@+id/nav_thi"
+            android:title="Thi sát hạch"
+            android:icon="@drawable/ic_home_thi"
+            />
+        <item
+            android:id="@+id/nav_bienbao"
+            android:title="Các biển báo đường bộ"
+            android:icon="@drawable/ic_home_bienbao"
+            />
+        <item
+            android:id="@+id/nav_meo"
+            android:title="Mẹo thi kết quả cao"
+            android:icon="@drawable/ic_home_meothi"
+            />
+        <item
+            android:id="@+id/nav_tracuu"
+            android:title="Tra cứu luật nhanh"
+            android:icon="@drawable/ic_home_tracuu"
+            />
+        <item
+            android:id="@+id/nav_causai"
+            android:title="Các câu hay sai"
+            android:icon="@drawable/ic_home_causai"
+            />
+    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_caidat"
+                android:title="Cài đặt"
+                android:icon="@drawable/ic_home_caidat"
+                />
+            <item
+                android:id="@+id/nav_danhgia"
+                android:title="Đánh giá"
+                android:icon="@drawable/ic_home_danhgia"
+                />
+            <item
+                android:id="@+id/nav_chiase"
+                android:title="Chia sẻ"
+                android:icon="@drawable/ic_home_chiase"
+                />
+        </menu>
+    </item>
+
+
+</menu>

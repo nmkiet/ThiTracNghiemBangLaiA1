@@ -1,0 +1,10 @@
+E:\BTWin\FrmDangNhap\FrmDangNhap\bin\Debug\FrmDangNhap.exe.config
+E:\BTWin\FrmDangNhap\FrmDangNhap\bin\Debug\FrmDangNhap.exe
+E:\BTWin\FrmDangNhap\FrmDangNhap\bin\Debug\FrmDangNhap.pdb
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.csprojResolveAssemblyReference.cache
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.Form1.resources
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.frmMain.resources
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.Properties.Resources.resources
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.csproj.GenerateResource.Cache
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.exe
+E:\BTWin\FrmDangNhap\FrmDangNhap\obj\Debug\FrmDangNhap.pdb
