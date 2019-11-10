@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_trangchu"
+            android:title="Trang chủ" />
+        <item
+            android:id="@+id/nav_hoclythuyet"
+            android:title="Học lý thuyết" />
+        <item
+            android:id="@+id/nav_thisathach"
+            android:title="Thi sát hạch" />
+        <item
+            android:id="@+id/nav_bienbao"
+            android:title="Biển báo đường bộ" />
+        <item
+            android:id="@+id/nav_meothi"
+            android:title="Mẹo thi kết quả cao" />
+        <item
+            android:id="@+id/nav_tracuu"
+            android:title="Tra cứu luật nhanh" />
+        <item
+            android:id="@+id/nav_cauhoi"
+            android:title="Các câu hỏi hay sai" />
+    </group>
+
+    <item android:title="Help">
+        <menu>
+            <item
+                android:id="@+id/nav_trogiup"
+                android:title="Trợ giúp và phản hồi" />
+            <item
+                android:id="@+id/nav_huongdan"
+                android:title="Hướng dẫn sử dụng    " />
+        </menu>
+    </item>
+
+</menu>
