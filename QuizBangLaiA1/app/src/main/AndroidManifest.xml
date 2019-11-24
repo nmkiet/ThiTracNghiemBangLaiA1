@@ -9,6 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TraCuu.MainTraCuu"></activity>
+        <activity android:name=".BienBao.MainBienBao" />
+        <activity android:name=".MeoThi.MeoThiActivity">
+
+        </activity>
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".ThiSatHach.ThishActivity" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -17,6 +24,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

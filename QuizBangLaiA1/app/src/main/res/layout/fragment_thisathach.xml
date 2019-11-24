@@ -2,12 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9C27B0">
+    android:background="#00BCD4">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/TopHocLyThuyet"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp">
+        </ImageButton>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnstart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="thi sát hạch"/>
-
-
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="Bắt đầu thi"></Button>
 </RelativeLayout>

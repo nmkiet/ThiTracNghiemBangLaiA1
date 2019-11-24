@@ -7,13 +7,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
+import com.example.quizbanglaia1.BienBao.MainBienBao;
 import com.example.quizbanglaia1.HocLyThuyet.HocLyThuyetFragment;
 import com.example.quizbanglaia1.Home.homeFragment;
+import com.example.quizbanglaia1.MeoThi.MeoThiActivity;
 import com.example.quizbanglaia1.ThiSatHach.ThiSatHachFragment;
+import com.example.quizbanglaia1.ThiSatHach.ThishActivity;
+import com.example.quizbanglaia1.TraCuu.MainTraCuu;
 import com.example.quizbanglaia1.TrangChu.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DrawerLayout drawer;
     GridView gridView;
+    Button btnhlt,btntsh,btnmt,btnbb,btntc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +37,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        btn = findViewById(R.id.btn_bb);
+//        btn = findViewById(R.id.btn_cs);
+//        btn = findViewById(R.id.btn_hlt);
+//        btn = findViewById(R.id.btn_mt);
+        btntsh = findViewById(R.id.btn_tsh);
+        btntsh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ThishActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnmt = findViewById(R.id.btn_mt);
+        btnmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MeoThiActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnbb = findViewById(R.id.btn_bb);
+        btnbb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainBienBao.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btntc = findViewById(R.id.btn_tracuu);
+        btntc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainTraCuu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
 
         drawer = findViewById(R.id.drawer_layout);
@@ -41,53 +90,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        //Trang chủ
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new homeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_trangchu);
-        }
     }
-
+    // *******************sự kiện click item navigation ************
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.nav_trangchu:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new homeFragment()).commit();
+        int id=item.getItemId();
+        switch (id) {
+            case R.id.nav_thi:
+                Intent t = new Intent(MainActivity.this,ThishActivity.class);
+                startActivity(t);
                 break;
-
-            case R.id.nav_thisathach:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ThiSatHachFragment()).commit();
-                break;
-
-            case R.id.nav_hoclythuyet:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HocLyThuyetFragment()).commit();
-                break;
-
             case R.id.nav_bienbao:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HocLyThuyetFragment()).commit();
+                Intent bb = new Intent(MainActivity.this,MainBienBao.class);
+                startActivity(bb);
                 break;
-
-            case R.id.nav_meothi:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HocLyThuyetFragment()).commit();
+            case R.id.nav_meo:
+                Intent m = new Intent(MainActivity.this,MeoThiActivity.class);
+                startActivity(m);
                 break;
-
             case R.id.nav_tracuu:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HocLyThuyetFragment()).commit();
+                Intent tc = new Intent(MainActivity.this,MainTraCuu.class);
+                startActivity(tc);
                 break;
-
-            case R.id.nav_cauhoi:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HocLyThuyetFragment()).commit();
-                break;
+//            case R.id.nav_causai:
+//                Intent cs = new Intent(MainActivity.this,MainC.class);
+//                startActivity(t);
+//                break;
 
         }
         drawer.closeDrawer(GravityCompat.START);

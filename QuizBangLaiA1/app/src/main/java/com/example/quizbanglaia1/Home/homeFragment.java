@@ -1,27 +1,21 @@
 package com.example.quizbanglaia1.Home;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
+import com.example.quizbanglaia1.HocLyThuyet.HocLyThuyetFragment;
 import com.example.quizbanglaia1.R;
-import com.example.quizbanglaia1.ThiSatHach.ThiSatHachActivity;
 import com.example.quizbanglaia1.ThiSatHach.ThiSatHachFragment;
-import com.example.quizbanglaia1.TrangChu.AdapterHome;
-import com.example.quizbanglaia1.TrangChu.classHome;
 
 import java.util.ArrayList;
 
@@ -58,12 +52,18 @@ public class homeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//                if(homeArrayList.get(i)== 1) { //How to lấy 1 phần tử trong grid?
+//                if(homeArrayList.get(i).getName() == "Thi sát hạch") { //How to lấy 1 phần tử trong grid?
 //                    ThiSatHachFragment thiSatHachFragment = new ThiSatHachFragment();
-//                    fragmentTransaction.add(R.id.fragment_container, thiSatHachFragment);
+//                    fragmentTransaction.replace(R.id.fragment_container, thiSatHachFragment);
+//                    fragmentTransaction.commit();
+//                    //Toast.makeText(getActivity(), "c", Toast.LENGTH_SHORT).show();
+//                }
+//                else if(homeArrayList.get(i).getName() == "Học lý thuyết")
+//                {
+//                    HocLyThuyetFragment hocLyThuyetFragment = new HocLyThuyetFragment();
+//                    fragmentTransaction.replace(R.id.fragment_container, hocLyThuyetFragment);
 //                    fragmentTransaction.commit();
 //                }
-                Toast.makeText(getActivity(), homeArrayList.get(i).getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

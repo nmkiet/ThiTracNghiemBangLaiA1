@@ -46,7 +46,9 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(context, "click "+classHomeList.get(position).toString(), Toast.LENGTH_SHORT).show();
+                if(classHomeList.get(position).getMoTa() == "Thi sát hạch") {
+                    Toast.makeText(context, "click ", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

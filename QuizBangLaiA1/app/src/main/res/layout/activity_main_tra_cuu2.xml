@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TraCuu.MainTraCuu">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_tc"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Tra Cứu Luật Nhanh"
+        app:titleTextColor="#FFF"
+        android:background="#8BC34A"
+        app:popupTheme="@color/colorPrimary"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs_TC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#8BC34A"
+        app:tabGravity="center"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#FF5722"
+        app:tabTextColor="#000"
+        app:tabPaddingStart="34dp"
+        app:tabPaddingEnd="50dp"
+        >
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/itemxedap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_directions_bike_black_24dp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/itemxemoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_motorcycle_black_24dp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/itemngdibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_directions_walk_black_24dp" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/itemxeoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_drive_eta_black_24dp" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_TC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</LinearLayout>
