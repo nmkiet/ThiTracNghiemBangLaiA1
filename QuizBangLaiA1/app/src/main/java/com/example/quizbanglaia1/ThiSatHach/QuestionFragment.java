@@ -37,8 +37,7 @@ public class QuestionFragment extends Fragment implements IQuestion {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View itemView = inflater.inflate(R.layout.fragment_question, container, false);
 
         //lay question
@@ -115,6 +114,7 @@ public class QuestionFragment extends Fragment implements IQuestion {
         StringBuilder result = new StringBuilder();
         if(Common.selected_value.size() > 1)
         {
+            //chon nhiu`
             Object[] arrayAnswer = Common.selected_value.toArray();
             for(int i = 0; i<arrayAnswer.length;i++)
             {
@@ -126,6 +126,7 @@ public class QuestionFragment extends Fragment implements IQuestion {
         }
         else if(Common.selected_value.size() == 1)
         {
+            //chon 1
             Object[] arrayAnswer = Common.selected_value.toArray();
             result.append((String)arrayAnswer[0]).substring(0,1);
         }
@@ -135,7 +136,7 @@ public class QuestionFragment extends Fragment implements IQuestion {
                 if (result.toString().equals(question.getCorrectAnswer()))
                     currentQuestion.setType(Common.ANSWER_TYPE.RIGHT_ANSWER);
                 else
-                    currentQuestion.setType(Common.ANSWER_TYPE.NO_ANSWER);
+                    currentQuestion.setType(Common.ANSWER_TYPE.WRONG_ANSWER);
             }
             else
                 currentQuestion.setType(Common.ANSWER_TYPE.NO_ANSWER);
@@ -145,11 +146,11 @@ public class QuestionFragment extends Fragment implements IQuestion {
             currentQuestion.setType(Common.ANSWER_TYPE.NO_ANSWER);
         }
         Common.selected_value.clear();
-        return null;
+        return currentQuestion;
     }
 
     @Override
-    public void showCorrectAnswer() {
+     public void showCorrectAnswer() {
         String[] correctAnswer = question.getCorrectAnswer().split(",");
         for (String answer:correctAnswer)
         {

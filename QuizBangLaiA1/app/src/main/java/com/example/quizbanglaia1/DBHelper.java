@@ -13,7 +13,7 @@ import java.util.List;
 public class DBHelper extends SQLiteAssetHelper {
 
 
-    private static final String DB_NAME = "QuizA1.db";
+    private static final String DB_NAME = "QuizbanglaiA1.db";
     private static final int DB_VER = 1;
 
     private static DBHelper instance;
@@ -49,7 +49,7 @@ public class DBHelper extends SQLiteAssetHelper {
                         cursor.getString(cursor.getColumnIndex("AnswerC")),
                         cursor.getString(cursor.getColumnIndex("AnswerD")),
                         cursor.getString(cursor.getColumnIndex("CorrectAnswer")),
-                        cursor.getInt(cursor.getColumnIndex("IsImageQuestion")),"");
+                        cursor.getInt(cursor.getColumnIndex("IsImageQuestion"))==0?Boolean.FALSE:Boolean.TRUE);
                 questions.add(question);
                 cursor.moveToNext();
             }

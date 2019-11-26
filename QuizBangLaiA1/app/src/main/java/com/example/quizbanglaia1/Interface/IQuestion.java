@@ -8,5 +8,5 @@ public interface IQuestion {
     void showCorrectAnswer();
     void disableAnswer();
     void resetQuestion();
-
+    //p317------------------------------------------>
 }

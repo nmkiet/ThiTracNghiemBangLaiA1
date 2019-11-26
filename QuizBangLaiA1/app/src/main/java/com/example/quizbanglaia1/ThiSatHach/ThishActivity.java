@@ -1,26 +1,23 @@
 package com.example.quizbanglaia1.ThiSatHach;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,23 +25,23 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.quizbanglaia1.Common.Common;
 import com.example.quizbanglaia1.DBHelper;
-import com.example.quizbanglaia1.MainActivity;
+import com.example.quizbanglaia1.Model.CurrentQuestion;
 import com.example.quizbanglaia1.Model.Question;
 import com.example.quizbanglaia1.R;
-import com.example.quizbanglaia1.ResultActivity;
 import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ThishActivity extends AppCompatActivity {
-    
+
+    private static final int CODE_GET_RESULT = 9999;
     int time_play = Common.TOTAL_TIME;
     boolean isAnswerModeView = false;
+    //TextView txt_right_answer,txt_wrong_answer;
     TextView txtTimer;
-
     ViewPager viewPager;
     TabLayout tabLayout;
 
@@ -68,7 +65,6 @@ public class ThishActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         takeQuestion();
-
 
         txtTimer = (TextView) findViewById(R.id.txt_timer);
         txtTimer.setVisibility(View.VISIBLE);
@@ -138,7 +134,23 @@ public class ThishActivity extends AppCompatActivity {
                     questionFragment = Common.fragmentsList.get(0);
                     i = 0;
                 }
-                //sheet right answer
+
+                //P333---------------
+                CurrentQuestion question_state = questionFragment.getSelectedAnswer();
+                Common.answerSheetList.set(position, question_state);
+
+                    countCorrectAnswer();
+
+//                //co the bo
+//                txt_right_answer.setText(new StringBuilder(String.format("%d",Common.right_answer_count))
+//                .append("/")
+//                .append(String.format("%d",Common.questionList.size())).toString());
+
+                if(question_state.getType() == Common.ANSWER_TYPE.NO_ANSWER)
+                {
+                    questionFragment.showCorrectAnswer();
+                    questionFragment.disableAnswer();
+                }
             }
 
             @Override
@@ -150,12 +162,26 @@ public class ThishActivity extends AppCompatActivity {
         });
 
         //-----------------------------------------------------------------------
+    }
 
-
+    private void countCorrectAnswer() {
+        Common.right_answer_count = Common.wrong_answer_count = 0;
+        for(CurrentQuestion item:Common.answerSheetList) {
+            if (item.getType() == Common.ANSWER_TYPE.RIGHT_ANSWER)
+                Common.right_answer_count++;
+            else if (item.getType() == Common.ANSWER_TYPE.WRONG_ANSWER)
+                Common.wrong_answer_count++;
+        }
     }
 
     private void takeQuestion() {
         Common.questionList = DBHelper.getInstance(this).getQuestion();
+        if(Common.questionList.size() > 0)
+            Common.answerSheetList.clear();
+        for(int i=0; i<Common.questionList.size();i++)
+        {
+            Common.answerSheetList.add(new CurrentQuestion(i,Common.ANSWER_TYPE.NO_ANSWER));
+        }
     }
 
     private void genFragmentList() {
@@ -219,14 +245,14 @@ public class ThishActivity extends AppCompatActivity {
         //adapter = new ResultAnswerAdapter(this, R.layout.item_result_thisathach, arr_Ques);
         gridView.setAdapter(adapter);
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                //
-                dialog.dismiss();
-            }
-        });
+//        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                //
+//                dialog.dismiss();
+//            }
+//        });
 
         Button buttonDong;
         buttonDong = (Button) dialog.findViewById(R.id.btnDong);
@@ -240,7 +266,7 @@ public class ThishActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    //menu left==============================================
+    //menu right==============================================
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.question, menu);
@@ -255,9 +281,9 @@ public class ThishActivity extends AppCompatActivity {
         if(id == R.id.menu_ketthuc) {
             if (!isAnswerModeView) {
                 new MaterialStyledDialog.Builder(this)
-                        .setTitle("Finish ?")
+                        //.setTitle("Muốn có chắc muốn kết thúc bài thi?")
                         .setIcon(R.drawable.ic_mood_black_24dp)
-                        .setDescription("chắc chưa?")
+                        .setDescription("Muốn có chắc muốn kết thúc bài thi?")
                         .setNegativeText("No")
                         .onNegative(new MaterialDialog.SingleButtonCallback() {
                             @Override
@@ -271,10 +297,14 @@ public class ThishActivity extends AppCompatActivity {
                             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                                 dialog.dismiss();
                                 finishGame();
-
+                                //drawer.closeDrawerp436
+                                //Intent intent = new Intent(ThishActivity.this, ResultActivity.class);
+                                //startActivity(intent);
                             }
                         }).show();
             }
+            else
+                finishGame();
             return true;
         }
 
@@ -289,8 +319,87 @@ public class ThishActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void finishGame() {
         int position = viewPager.getCurrentItem();
+        QuestionFragment questionFragment = Common.fragmentsList.get(position);
+        CurrentQuestion question_state = questionFragment.getSelectedAnswer();
+        Common.answerSheetList.set(position, question_state);
+        countCorrectAnswer();
+        //co the bo
+//        txt_right_answer.setText(new StringBuilder(String.format("%d",Common.right_answer_count))
+//                .append("/")
+//                .append(String.format("%d",Common.questionList.size())).toString());
+
+        if(question_state.getType() == Common.ANSWER_TYPE.NO_ANSWER)
+        {
+            questionFragment.showCorrectAnswer();
+            questionFragment.disableAnswer();
+        }
+        //P4--------
+        Intent intent = new Intent(ThishActivity.this, kqActivity.class);
+        Common.timer = Common.TOTAL_TIME - time_play;
+        Common.no_answer_count = Common.questionList.size() - (Common.wrong_answer_count + Common.right_answer_count);
+        Common.data_question = new StringBuilder(new Gson().toJson(Common.answerSheetList));
+        startActivityForResult(intent, CODE_GET_RESULT);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == CODE_GET_RESULT)
+        {
+            if(requestCode == Activity.RESULT_OK)
+            {
+                String action = data.getStringExtra("action");
+                if(action == null || TextUtils.isEmpty(action))
+                {
+                    int questionNum = data.getIntExtra(Common.KEY_BACK_FROM_RESULT,-1);
+                    viewPager.setCurrentItem(questionNum);
+
+                    isAnswerModeView = true;
+                    Common.countDownTimer.cancel();
+
+                    //txt_wrong_answer.setVisibility(View.GONE);
+                    //txt_right_answer.setVisibility(View.GONE);
+                    txtTimer.setVisibility(View.GONE);
+                }
+                else
+                {
+                    if(action.equals("viewquizanswer"))
+                    {
+                        viewPager.setCurrentItem(0);
+
+                        isAnswerModeView = true;
+                        Common.countDownTimer.cancel();
+
+                        //txt_wrong_answer.setVisibility(View.GONE);
+                        //txt_right_answer.setVisibility(View.GONE);
+                        txtTimer.setVisibility(View.GONE);
+
+                        for(int i=0; i<Common.fragmentsList.size();i++)
+                        {
+                            Common.fragmentsList.get(i).showCorrectAnswer();
+                            Common.fragmentsList.get(i).disableAnswer();
+                        }
+                    }
+                    else if(action.equals("doitagain"))
+                    {
+                        viewPager.setCurrentItem(0);
+
+                        isAnswerModeView = false;
+                        countTimer();
+
+                        //txt_wrong_answer.setVisibility(View.VISIBLE);
+                        //txt_right_answer.setVisibility(View.VISIBLE);
+                        txtTimer.setVisibility(View.VISIBLE);
+
+                        for (int i=0;i<Common.fragmentsList.size();i++)
+                            Common.fragmentsList.get(i).resetQuestion();
+
+                    }
+                }
+            }
+        }
     }
 }

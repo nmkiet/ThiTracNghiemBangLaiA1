@@ -25,12 +25,6 @@ public class ResultAnswerAdapter extends BaseAdapter {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-//    public ResultAnswerAdapter(Context context, int layout, List<Question> lsData) {
-//        this.context = context;
-//        this.layout = layout;
-//        this.lsData = lsData;
-//    }
-
     @Override
     public int getCount() {
         return lsData.size();
@@ -72,8 +66,8 @@ public class ResultAnswerAdapter extends BaseAdapter {
         //Question qs = lsData.get(i);
         int position = i + 1;
         holder.tvAnswerQuestion.setText("Câu "+position+": ");
-        holder.tvResultQuestion.setText(data.getTraLoi());
-        //holder.tvResultQuestion.setText("A");
+        //holder.tvResultQuestion.setText(data.getTraLoi());
+        holder.tvResultQuestion.setText("A");
 
         return view;
     }
