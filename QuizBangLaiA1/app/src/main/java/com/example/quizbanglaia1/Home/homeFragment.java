@@ -13,9 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.quizbanglaia1.HocLyThuyet.HocLyThuyetFragment;
 import com.example.quizbanglaia1.R;
-import com.example.quizbanglaia1.ThiSatHach.ThiSatHachFragment;
 
 import java.util.ArrayList;
 
@@ -52,18 +50,7 @@ public class homeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//                if(homeArrayList.get(i).getName() == "Thi sát hạch") { //How to lấy 1 phần tử trong grid?
-//                    ThiSatHachFragment thiSatHachFragment = new ThiSatHachFragment();
-//                    fragmentTransaction.replace(R.id.fragment_container, thiSatHachFragment);
-//                    fragmentTransaction.commit();
-//                    //Toast.makeText(getActivity(), "c", Toast.LENGTH_SHORT).show();
-//                }
-//                else if(homeArrayList.get(i).getName() == "Học lý thuyết")
-//                {
-//                    HocLyThuyetFragment hocLyThuyetFragment = new HocLyThuyetFragment();
-//                    fragmentTransaction.replace(R.id.fragment_container, hocLyThuyetFragment);
-//                    fragmentTransaction.commit();
-//                }
+
             }
         });
 

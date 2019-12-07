@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import com.example.quizbanglaia1.BienBao.MainBienBao;
-import com.example.quizbanglaia1.HocLyThuyet.HocLyThuyetFragment;
+
+import com.example.quizbanglaia1.HocLyThuyet.MainHocLT;
+import com.example.quizbanglaia1.HocLyThuyet.MainHocLThuyet;
 import com.example.quizbanglaia1.Home.homeFragment;
 import com.example.quizbanglaia1.MeoThi.MeoThiActivity;
 import com.example.quizbanglaia1.ThiSatHach.ThiSatHachFragment;
@@ -73,6 +75,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainTraCuu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnhlt = findViewById(R.id.btn_hlt);
+        btnhlt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainHocLThuyet.class);
                 startActivity(intent);
                 finish();
             }

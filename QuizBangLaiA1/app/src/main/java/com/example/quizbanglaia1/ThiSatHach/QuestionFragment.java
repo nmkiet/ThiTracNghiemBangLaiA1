@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,12 +24,15 @@ import com.example.quizbanglaia1.Interface.IQuestion;
 import com.example.quizbanglaia1.Model.CurrentQuestion;
 import com.example.quizbanglaia1.Model.Question;
 import com.example.quizbanglaia1.R;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 public class QuestionFragment extends Fragment implements IQuestion {
 
     TextView txt_question_text;
     CheckBox ckbA, ckbB, ckbC, ckbD;
     FrameLayout layout_image;
+    ProgressBar progressBar;
 
     Question question;
     int questionIndex = -1;
@@ -45,10 +50,24 @@ public class QuestionFragment extends Fragment implements IQuestion {
         question = Common.questionList.get(questionIndex);
 
         if(question != null) {
-
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
             layout_image = (FrameLayout) itemView.findViewById(R.id.layout_image);
             //loadImage
-            //if(question.isImageQuestion)
+            if(question.isImageQuestion())
+            {
+                ImageView img_question = (ImageView) itemView.findViewById(R.id.img_question);
+                Picasso.get().load(question.getQuestionImage()).into(img_question, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
+            }
+            else layout_image.setVisibility(View.GONE);
 
             //anh xa
             txt_question_text = (TextView) itemView.findViewById(R.id.txt_question_text);
@@ -116,13 +135,13 @@ public class QuestionFragment extends Fragment implements IQuestion {
         {
             //chon nhiu`
             Object[] arrayAnswer = Common.selected_value.toArray();
-            for(int i = 0; i<arrayAnswer.length;i++)
-            {
+            for(int i = 0; i<arrayAnswer.length; i++)
+
                 if(i<arrayAnswer.length-1)
                     result.append(new StringBuilder(((String)arrayAnswer[i]).substring(0,1)).append(","));
                 else
                     result.append(new StringBuilder((String)arrayAnswer[i]).substring(0,1));
-            }
+
         }
         else if(Common.selected_value.size() == 1)
         {

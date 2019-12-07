@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 public class kqActivity extends AppCompatActivity {
 
+    private static final int CODE_GET_RESULT = 9999;
     Toolbar toolbar;
     TextView txt_timer, txt_result, txt_right_answer;
     Button btn_filter_total, btn_filter_right, btn_filter_wrong, btn_filter_no_answer;
@@ -60,66 +61,13 @@ public class kqActivity extends AppCompatActivity {
     }
     //-------------^-------------
 
-    //3=====================================================================================
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.result_menu, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId())
-        {
-            case R.id.menu_do_quiz_again:
-                doQuizAgain();
-                break;
-            case R.id.menu_view_answer:
-                viewQuizAnswer();
-                break;
-            case android.R.id.home:
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                break;
-        }
-        return true;
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(kqActivity.this)
+                .unregisterReceiver(backToQuestion);
+        super.onDestroy();
     }
-
-    private void doQuizAgain() {
-        new MaterialStyledDialog.Builder(kqActivity.this)
-                //.setTitle("Bạn có muốn thi lại?")
-                .setIcon(R.drawable.ic_mood_black_24dp)
-                .setDescription("Bạn có muốn thi lại?")
-                .setNegativeText("No")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveText("Yes")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        dialog.dismiss();
-
-                        Intent returnIntent = new Intent();
-                        returnIntent.putExtra("action","doitagain");
-                        setResult(Activity.RESULT_OK, returnIntent);
-                        finish();
-                    }
-                }).show();
-    }
-
-    private void viewQuizAnswer() {
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("action","viewquizanswer");
-        setResult(Activity.RESULT_OK, returnIntent);
-        finish();
-    }
-    //=======================================================================================
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +75,7 @@ public class kqActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kq);
 
         //2
-        LocalBroadcastManager.getInstance(this)
+        LocalBroadcastManager.getInstance(kqActivity.this)
                 .registerReceiver(backToQuestion, new IntentFilter(Common.KEY_BACK_FROM_RESULT));
 
         //1
@@ -149,7 +97,7 @@ public class kqActivity extends AppCompatActivity {
 
         recycler_result = (RecyclerView) findViewById(R.id.recycler_result);
         recycler_result.setHasFixedSize(true);
-        recycler_result.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler_result.setLayoutManager(new GridLayoutManager(this, 4));
 
         //2 Set Adapter--------------------------------------------------------------------
         adapter = new kqGirdAdapter(this, Common.answerSheetList);
@@ -160,7 +108,7 @@ public class kqActivity extends AppCompatActivity {
                 TimeUnit.MILLISECONDS.toMinutes(Common.timer),
                 TimeUnit.MILLISECONDS.toSeconds(Common.timer) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(Common.timer))));
-        txt_right_answer.setText(new StringBuilder("...").append(Common.right_answer_count).append("/")
+        txt_right_answer.setText(new StringBuilder("").append(Common.right_answer_count).append("/")
                 .append(Common.questionList.size()));
 
         btn_filter_total.setText(new StringBuilder("").append(Common.questionList.size()));
@@ -240,4 +188,68 @@ public class kqActivity extends AppCompatActivity {
         //=========================== Tiếp theo sẽ làm result_menu (3^) =====================================
 
     }
+
+
+    //3=======================================================================
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.result_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+//            case R.id.menu_do_quiz_again:
+//                doQuizAgain();
+//                break;
+//            case R.id.menu_view_answer:
+//                viewQuizAnswer();
+//                break;
+            case android.R.id.home:
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+        }
+        return true;
+    }
+
+    private void viewQuizAnswer() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("action","viewquizanswer");
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
+    }
+
+    private void doQuizAgain() {
+        new MaterialStyledDialog.Builder(kqActivity.this)
+                //.setTitle("Bạn có muốn thi lại?")
+                .setIcon(R.drawable.ic_mood_black_24dp)
+                .setDescription("Bạn có muốn thi lại?")
+                .setNegativeText("No")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveText("Yes")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        dialog.dismiss();
+
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("action","doitagain");
+                        setResult(Activity.RESULT_OK, returnIntent);
+
+                        finish();
+                    }
+                }).show();
+    }
+
+
 }

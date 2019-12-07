@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MeoThi.MeoThiActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="parent"
-        >
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/Toolbar_meothi"
             app:title="Mẹo Thi"
@@ -23,23 +17,20 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize">
         </androidx.appcompat.widget.Toolbar>
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs_MT"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#8BC34A"
-            app:tabSelectedTextColor="#FF5722"
-            app:tabGravity="fill"
-            app:tabMode="scrollable"
-            app:tabTextColor="#000"
-            />
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/vp_MT"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+
+    <VideoView
+        android:id="@+id/video"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+    </VideoView>
+
+    <ListView
+        android:id="@+id/lv_meothi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
 
 
-    </LinearLayout>
 
 
 </LinearLayout>

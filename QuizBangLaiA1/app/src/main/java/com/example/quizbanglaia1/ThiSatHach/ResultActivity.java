@@ -194,12 +194,12 @@ public class ResultActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.menu_do_quiz_again:
-                doQuizAgain();
-                break;
-            case R.id.menu_view_answer:
-                viewQuizAnswer();
-                break;
+//            case R.id.menu_do_quiz_again:
+//                doQuizAgain();
+//                break;
+//            case R.id.menu_view_answer:
+//                viewQuizAnswer();
+//                break;
             case android.R.id.home:
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

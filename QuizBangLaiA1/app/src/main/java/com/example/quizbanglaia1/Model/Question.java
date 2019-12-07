@@ -9,7 +9,6 @@ public class Question {
 
     }
 
-
     public Question(int id, String questionText, String questionImage, String answerA, String answerB, String answerC, String answerD, String correctAnswer, boolean isImageQuestion) {
         this.id = id;
         this.questionText = questionText;
@@ -20,16 +19,7 @@ public class Question {
         this.answerD = answerD;
         this.correctAnswer = correctAnswer;
         this.isImageQuestion = isImageQuestion;
-        //this.traLoi = traLoi;
     }
-
-//    public String getTraLoi() {
-//        return traLoi;
-//    }
-//
-//    public void setTraLoi(String traLoi) {
-//        this.traLoi = traLoi;
-//    }
 
     public int getId() {
         return id;
@@ -95,11 +85,11 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public boolean getIsImageQuestion() {
+    public boolean isImageQuestion() {
         return isImageQuestion;
     }
 
-    public void setIsImageQuestion(boolean isImageQuestion) {
-        this.isImageQuestion = isImageQuestion;
+    public void setImageQuestion(boolean imageQuestion) {
+        isImageQuestion = imageQuestion;
     }
 }
